@@ -9,11 +9,11 @@ router.get('/', (req, res) => {
         
         departure : { $regex : new RegExp(req.body.departure, "i") },
         arrival : { $regex : new RegExp(req.body.arrival, "i") },
-        date : new Date(req.body.date).getTime()
 
     }
 
     ).then(data => {
+        data.filter(e => new Date(e.date).getTime() == new Date(req.body.date).getTime())
         res.json({ trips: data });
     });
 });
